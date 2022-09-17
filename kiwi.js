@@ -7,7 +7,7 @@ import {
   const kiwiElem = document.querySelector("[data-kiwi]")
   const JUMP_SPEED = 0.45
   const GRAVITY = 0.0015
-  const DINO_FRAME_COUNT = 2
+  const KIWI_FRAME_COUNT = 2
   const FRAME_TIME = 100
   
   let isJumping
@@ -44,7 +44,7 @@ import {
     }
   
     if (currentFrameTime >= FRAME_TIME) {
-      kiwiFrame = (kiwiFrame + 1) % DINO_FRAME_COUNT
+      kiwiFrame = (kiwiFrame + 1) % KIWI_FRAME_COUNT
       kiwiElem.src = `imgs/kiwi-run-${kiwiFrame}.png`
       currentFrameTime -= FRAME_TIME
     }
