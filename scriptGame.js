@@ -2,6 +2,7 @@ import { updateFloor, setupFloor } from "./floor.js"
 import { updateKiwi, setupKiwi, getKiwiRect, setKiwiLose } from "./kiwi.js"
 import { updateFern, setupFern, getFernRects } from "./fern.js"
 
+
 const WORLD_WIDTH = 100
 const WORLD_HEIGHT = 30
 const SPEED_SCALE_INCREASE = 0.00001
@@ -9,7 +10,6 @@ const SPEED_SCALE_INCREASE = 0.00001
 const worldElem = document.querySelector("[data-world]")
 const scoreElem = document.querySelector("[data-score]")
 const startScreenElem = document.querySelector("[data-start-screen]")
-
 
 setPixelToWorldScale()
 document.addEventListener("resize", setPixelToWorldScale)
@@ -37,12 +37,12 @@ function update(time) {
   lastTime = time
   window.requestAnimationFrame(update)
 }
-
+ // cheks if if the collision happened
 function checkLose() {
   const kiwiRect = getKiwiRect()
   return getFernRects().some(rect => isCollision(rect, kiwiRect))
 }
-
+ // the collision parameters
 function isCollision(rect1, rect2) {
   return (
     rect1.left < rect2.right &&
@@ -51,16 +51,16 @@ function isCollision(rect1, rect2) {
     rect1.bottom > rect2.top
   )
 }
-
+ // updates speed scale
 function updateSpeedScale(delta) {
   speedScale += delta * SPEED_SCALE_INCREASE
 }
-
+ // scoreboard
 function updateScore(delta) {
   score += delta * 0.01
   scoreElem.textContent = Math.floor(score)
 }
-
+ // star gamee function
 function handleStart() {
   lastTime = null
   speedScale = 1
@@ -71,7 +71,7 @@ function handleStart() {
   startScreenElem.classList.add("hide")
   window.requestAnimationFrame(update)
 }
-
+ // lose function
 function handleLose() {
   setKiwiLose()
   setTimeout(() => {
@@ -79,7 +79,7 @@ function handleLose() {
     startScreenElem.classList.remove("hide")
   }, 100)
 }
-
+ // screen scale calculations
 function setPixelToWorldScale() {
   let worldToPixelScale
   if (window.innerWidth / window.innerHeight < WORLD_WIDTH / WORLD_HEIGHT) {
